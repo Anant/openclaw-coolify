@@ -155,8 +155,8 @@ export OPENCLAW_STATE_DIR="$OPENCLAW_STATE"
 # ----------------------------
 # Sandbox setup
 # ----------------------------
-[ -f scripts/sandbox-setup.sh ] && bash scripts/sandbox-setup.sh
-[ -f scripts/sandbox-browser-setup.sh ] && bash scripts/sandbox-browser-setup.sh
+[ -f scripts/sandbox-setup.sh ] && bash scripts/sandbox-setup.sh || true
+[ -f scripts/sandbox-browser-setup.sh ] && bash scripts/sandbox-browser-setup.sh || true
 
 # ----------------------------
 # Recovery & Monitoring
