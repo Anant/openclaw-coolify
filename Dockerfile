@@ -85,17 +85,16 @@ RUN --mount=type=cache,target=/data/.npm \
     npm install -g openclaw; \
     fi 
 
-# Install uv explicitly
-RUN curl -L https://github.com/azlux/uv/releases/latest/download/uv-linux-x64 -o /usr/local/bin/uv && \
-    chmod +x /usr/local/bin/uv
+# Install Astral uv (required by claude.ai/install.sh)
+RUN curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# uv lands in /root/.local/bin — must be in PATH before Claude/Kimi install
+ENV PATH="/root/.local/bin:${PATH}"
 
 # Claude + Kimi
 RUN curl -fsSL https://claude.ai/install.sh | bash && \
     curl -L https://code.kimi.com/install.sh | bash && \
     command -v uv
-
-# Make sure uv and other local bins are available
-ENV PATH="/root/.local/bin:${PATH}"
 
 ########################################
 # Stage 4: Final
